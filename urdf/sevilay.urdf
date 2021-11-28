@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<robot name="sevilay">
+  
+  <link name="base" >
+  <visual>
+      <geometry>
+        <box size="1 0.1 0.1" />
+      </geometry>
+      <origin xyz="5 0 0" />
+      <material name="red" >
+        <color rgba="1 0 0 0.8" />
+      </material>
+    </visual>
+    <collision>
+        <geometry>
+           <box size="1 0.1 0.1" />
+         </geometry>
+     </collision>
+  </link>
+
+  <link name="dunya" >
+  <visual>
+      <geometry>
+        <mesh filename="package://silindir.dae"/>
+      </geometry>
+      <origin xyz="4 3 4" rpy="1.57075 1.57075 0"/>
+      <material name="blue">
+        <color rgba="0 0 1 0.8" />
+         </material>
+   </visual>
+    <collision>
+        <geometry>
+           <mesh filename="package://silindir.dae"/>
+         </geometry>
+     </collision>
+  </link>
+
+  <link name="mars" >
+  <visual>
+      <geometry>
+        <mesh filename="package://silindir.dae"/>
+      </geometry>
+      <origin xyz="0.3 0.7 3.5" rpy="1.57075 1.57075 0"/>
+      <material name="black_metal">
+        <color rgba="0.1 0.1 0.1 1"/>
+      </material>
+    </visual>
+    <collision>
+        <geometry>
+           <mesh filename="package://silindir.dae"/>
+         </geometry>
+     </collision>
+  </link>
+
+  <link name="jupiter" >
+  <visual>
+      <geometry>
+         <mesh filename="package://silindir.dae"/>
+      </geometry>
+      <origin xyz=" -8 -3 -3" />
+      <material name="gold">
+        <color rgba="1 0.549 0 0.8"/>
+      </material>
+    </visual>
+    <collision>
+        <geometry>
+           <mesh filename="package://silindir.dae"/>
+         </geometry>
+     </collision>
+  </link>
+
+
+  <joint name="ay" type="prismatic">
+    <parent link="base" />
+    <child link="dunya" />
+    <origin xyz="0 0 0" />
+    <axis xyz="-1 0 0" />
+    <limit effort='20' velocity='1.0' lower='-2.2' upper='5'/>
+  </joint>
+  
+  <joint name="deimos" type="prismatic">
+    <parent link="dunya" />
+    <child link="mars" />
+    <origin xyz="1 0 0" rpy="1.57075 1.57075 0" />
+    <axis xyz="1 0 0" />
+<limit effort='20' velocity='1.0' lower='-2.2' upper='5'/>
+  </joint>
+  
+  <joint name="europa" type="revolute">
+    <parent link="mars" />
+    <child link="jupiter" />
+    <origin xyz="1 0 0" rpy="0 0 0"/>
+<limit effort='20' velocity='1.0' lower='-2.2' upper='5'/>
+  </joint>
+  
+</robot>
